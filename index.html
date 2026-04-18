@@ -21,40 +21,48 @@
                 <li><a href="#about">About</a></li>
                 <li><a href="#projects">Projects</a></li>
                 <li><a href="#hobbies">Hobbies</a></li>
+                <li><a href="#interactive">Interactive</a></li>
                 <li><a href="#contact">Contact</a></li>
             </ul>
-            <!-- Login / Logout button in navbar -->
-            <button id="login-btn" class="login-btn">Log In</button>
+
+            <!-- Auth area: shows login btn OR avatar + name -->
+            <div class="nav-auth">
+                <button id="login-btn" class="login-btn">Log In</button>
+                <div id="user-pill" class="user-pill hidden">
+                    <div id="user-avatar" class="user-avatar"></div>
+                    <span id="user-display-name" class="user-display-name"></span>
+                    <button id="logout-btn" class="logout-btn" aria-label="Log out">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
+                            <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
+                            <polyline points="16 17 21 12 16 7"></polyline>
+                            <line x1="21" y1="12" x2="9" y2="12"></line>
+                        </svg>
+                    </button>
+                </div>
+            </div>
         </nav>
     </header>
 
     <!-- Welcome Banner (shown when logged in) -->
     <div id="welcome-banner" class="welcome-banner hidden">
-        👋 Welcome back, <strong id="welcome-name">Guest</strong>! You're viewing the portfolio as a logged-in user.
-        <button id="logout-btn" class="logout-inline-btn">Log out</button>
+        <span>👋 Welcome back, <strong id="welcome-name"></strong>!</span>
     </div>
 
     <!-- About Section (Tabbed) -->
     <section id="about" class="section">
         <div class="container">
             <h2>About Me</h2>
-
-            <!-- Tab Buttons -->
             <div class="tab-bar" role="tablist">
                 <button class="tab-btn active" role="tab" aria-selected="true" data-tab="about-tab">About</button>
                 <button class="tab-btn" role="tab" aria-selected="false" data-tab="skills-tab">Skills</button>
                 <button class="tab-btn" role="tab" aria-selected="false" data-tab="experience-tab">Experience</button>
             </div>
-
-            <!-- Tab Panels -->
             <div class="tab-panels">
 
                 <div id="about-tab" class="tab-panel active" role="tabpanel">
-                    <p>
-                        I am a Software Engineering student studying at KFUPM university, passionate about developing software
-                        in addition to applying Artificial Intelligence in niche domains.
-                        I enjoy building applications and learning new technologies.
-                    </p>
+                    <p>I am a Software Engineering student studying at KFUPM university, passionate about developing software
+                    in addition to applying Artificial Intelligence in niche domains.
+                    I enjoy building applications and learning new technologies.</p>
                 </div>
 
                 <div id="skills-tab" class="tab-panel" role="tabpanel">
@@ -108,7 +116,7 @@
     </section>
 
     <!-- Projects Section -->
-    <section id="projects" class="section alt-bg">
+    <section id="projects" class="section">
         <div class="container">
             <h2>Projects</h2>
 
@@ -134,17 +142,13 @@
             </div>
 
             <div class="project-grid" id="project-grid">
-
                 <div class="project-card" data-category="AI" data-date="2024" data-name="AI Study Assistant">
                     <div class="project-media">
                         <img src="assets/images/AI-ProjectPlaceHolder.png" alt="AI Study Assistant preview" loading="lazy">
                         <span class="project-badge">AI</span>
                     </div>
                     <h3>AI Study Assistant</h3>
-                    <p>
-                        A web app that uses basic NLP concepts to generate quiz questions
-                        and study recommendations for students.
-                    </p>
+                    <p>A web app that uses basic NLP concepts to generate quiz questions and study recommendations for students.</p>
                 </div>
 
                 <div class="project-card" data-category="JS" data-date="2024" data-name="Task Manager App">
@@ -153,10 +157,7 @@
                         <span class="project-badge">JS</span>
                     </div>
                     <h3>Task Manager App</h3>
-                    <p>
-                        A productivity app built with JavaScript that allows users
-                        to track tasks, set deadlines, and manage priorities.
-                    </p>
+                    <p>A productivity app built with JavaScript that allows users to track tasks, set deadlines, and manage priorities.</p>
                 </div>
 
                 <div class="project-card" data-category="Web" data-date="2023" data-name="Portfolio Website">
@@ -165,12 +166,8 @@
                         <span class="project-badge">Web</span>
                     </div>
                     <h3>Portfolio Website</h3>
-                    <p>
-                        This personal portfolio site built from scratch with HTML, CSS, and vanilla JavaScript,
-                        featuring dark mode, API integration, and a responsive layout.
-                    </p>
+                    <p>This personal portfolio site built from scratch with HTML, CSS, and vanilla JavaScript, featuring dark mode, API integration, and a responsive layout.</p>
                 </div>
-
             </div>
 
             <p id="no-projects-msg" class="no-projects-msg hidden">No projects match the selected filter.</p>
@@ -178,7 +175,7 @@
     </section>
 
     <!-- Hobbies Section -->
-    <section id="hobbies" class="section hobbies-section">
+    <section id="hobbies" class="section">
         <div class="container">
             <h2>My Hobbies</h2>
             <div class="hobbies-content">
@@ -192,42 +189,49 @@
                 </div>
                 <div class="hobby-card">
                     <h3>Computer Hardware</h3>
-                    <p>Researching news and leaks about new hardware components, technologies, and performance
-                        uplifts by the major manufacturers.
-                    </p>
+                    <p>Researching news and leaks about new hardware components, technologies, and performance uplifts by the major manufacturers.</p>
                 </div>
             </div>
+        </div>
+    </section>
 
-            <!-- Trivia Widget -->
-            <div class="trivia-widget">
-                <h3 class="trivia-title">🧠 Tech Trivia</h3>
-                <div id="trivia-content">
-                    <p id="trivia-loading">Loading trivia...</p>
-                    <div id="trivia-question-block" class="hidden">
-                        <p id="trivia-category" class="trivia-category"></p>
-                        <p id="trivia-question" class="trivia-question"></p>
-                        <div id="trivia-answers" class="trivia-answers"></div>
-                        <p id="trivia-feedback" class="trivia-feedback hidden"></p>
-                        <button id="trivia-next" class="trivia-next-btn hidden">Next Question →</button>
+    <!-- Interactive Section (Trivia + Quotes) -->
+    <section id="interactive" class="section">
+        <div class="container">
+            <h2>Interactive</h2>
+            <div class="interactive-grid">
+
+                <!-- Trivia Widget -->
+                <div class="trivia-widget">
+                    <h3 class="widget-title">🧠 Tech Trivia</h3>
+                    <div id="trivia-content">
+                        <p id="trivia-loading">Loading trivia...</p>
+                        <div id="trivia-question-block" class="hidden">
+                            <p id="trivia-category" class="trivia-category"></p>
+                            <p id="trivia-question" class="trivia-question"></p>
+                            <div id="trivia-answers" class="trivia-answers"></div>
+                            <p id="trivia-feedback" class="trivia-feedback hidden"></p>
+                            <button id="trivia-next" class="widget-btn hidden">Next Question →</button>
+                        </div>
+                        <p id="trivia-error" class="widget-error hidden">⚠️ Couldn't load trivia. Check your connection and try again.</p>
                     </div>
-                    <p id="trivia-error" class="trivia-error hidden">⚠️ Couldn't load trivia. Check your connection and try again.</p>
                 </div>
-            </div>
 
-            <!-- Quote Widget -->
-            <div class="quote-widget">
-                <h3 class="quote-title">💡 Quote of the Moment</h3>
-                <div id="quote-content">
-                    <p id="quote-loading">Loading quote...</p>
-                    <div id="quote-block" class="hidden">
-                        <p id="quote-text" class="quote-text"></p>
-                        <p id="quote-author" class="quote-author"></p>
+                <!-- Quote Widget -->
+                <div class="quote-widget">
+                    <h3 class="widget-title">💡 Quote of the Moment</h3>
+                    <div id="quote-content">
+                        <p id="quote-loading">Loading quote...</p>
+                        <div id="quote-block" class="hidden">
+                            <p id="quote-text" class="quote-text"></p>
+                            <p id="quote-author" class="quote-author"></p>
+                        </div>
+                        <p id="quote-error" class="widget-error hidden">⚠️ Couldn't load quote.</p>
                     </div>
-                    <p id="quote-error" class="quote-error hidden">⚠️ Couldn't load quote. Check your connection.</p>
+                    <button id="quote-refresh" class="widget-btn">New Quote ↻</button>
                 </div>
-                <button id="quote-refresh" class="quote-refresh-btn">New Quote ↻</button>
-            </div>
 
+            </div>
         </div>
     </section>
 
@@ -235,7 +239,6 @@
     <section id="contact" class="section">
         <div class="container">
             <h2>Contact Me</h2>
-
             <form class="contact-form" id="contact-form" novalidate>
                 <div class="form-field">
                     <input type="text" id="form-name" placeholder="Your Name">
@@ -264,10 +267,16 @@
     <!-- Login Modal -->
     <div id="login-modal" class="modal-overlay hidden" role="dialog" aria-modal="true" aria-labelledby="modal-title">
         <div class="modal">
-            <h3 id="modal-title">Log In</h3>
-            <p class="modal-subtitle">Enter your name to continue as a guest visitor.</p>
+            <div class="modal-header">
+                <div class="modal-avatar-preview" id="modal-avatar-preview"></div>
+                <div>
+                    <h3 id="modal-title">Welcome</h3>
+                    <p class="modal-subtitle">Enter your name to personalize your visit.</p>
+                </div>
+            </div>
             <div class="modal-field">
-                <input type="text" id="modal-name" placeholder="Your name" maxlength="40" autocomplete="off">
+                <label for="modal-name" class="modal-label">Your Name</label>
+                <input type="text" id="modal-name" placeholder="e.g. Ahmed" maxlength="40" autocomplete="off">
                 <span class="field-error" id="modal-name-error"></span>
             </div>
             <div class="modal-actions">

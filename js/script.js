@@ -7,9 +7,7 @@ document.addEventListener('DOMContentLoaded', () => {
         anchor.addEventListener("click", function (e) {
             e.preventDefault();
             const target = document.querySelector(this.getAttribute("href"));
-            if (target) {
-                target.scrollIntoView({ behavior: "smooth" });
-            }
+            if (target) target.scrollIntoView({ behavior: "smooth" });
         });
     });
 
@@ -19,14 +17,10 @@ document.addEventListener('DOMContentLoaded', () => {
     // =============================
     const sunIcon = `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
         <circle cx="12" cy="12" r="5"></circle>
-        <line x1="12" y1="1" x2="12" y2="3"></line>
-        <line x1="12" y1="21" x2="12" y2="23"></line>
-        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
-        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
-        <line x1="1" y1="12" x2="3" y2="12"></line>
-        <line x1="21" y1="12" x2="23" y2="12"></line>
-        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
-        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+        <line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line>
+        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+        <line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line>
+        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
     </svg>`;
 
     const moonIcon = `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -39,8 +33,7 @@ document.addEventListener('DOMContentLoaded', () => {
     themeButton.classList.add("theme-toggle-btn");
     document.body.appendChild(themeButton);
 
-    const savedTheme = localStorage.getItem("theme");
-    if (savedTheme === "dark") {
+    if (localStorage.getItem("theme") === "dark") {
         document.body.classList.add("dark-mode");
         themeButton.innerHTML = moonIcon;
     } else {
@@ -65,94 +58,118 @@ document.addEventListener('DOMContentLoaded', () => {
             const open = navLinks.classList.toggle('open');
             navToggle.setAttribute('aria-expanded', open ? 'true' : 'false');
         });
-
         navLinks.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
-            if (navLinks.classList.contains('open')) {
-                navLinks.classList.remove('open');
-                navToggle.setAttribute('aria-expanded', 'false');
-            }
+            navLinks.classList.remove('open');
+            navToggle.setAttribute('aria-expanded', 'false');
         }));
     }
 
 
     // =============================
-    // Simulated Login / Logout State
+    // Login / Logout — with localStorage persistence
     // =============================
     const loginBtn      = document.getElementById('login-btn');
+    const userPill      = document.getElementById('user-pill');
+    const userAvatar    = document.getElementById('user-avatar');
+    const userDispName  = document.getElementById('user-display-name');
+    const logoutBtn     = document.getElementById('logout-btn');
     const welcomeBanner = document.getElementById('welcome-banner');
     const welcomeName   = document.getElementById('welcome-name');
-    const logoutBtn     = document.getElementById('logout-btn');
-    const loginModal    = document.getElementById('login-modal');
-    const modalName     = document.getElementById('modal-name');
-    const modalNameErr  = document.getElementById('modal-name-error');
-    const modalCancel   = document.getElementById('modal-cancel');
-    const modalConfirm  = document.getElementById('modal-confirm');
 
-    // Track login state in memory
-    let isLoggedIn = false;
-    let currentUser = '';
+    const loginModal      = document.getElementById('login-modal');
+    const modalName       = document.getElementById('modal-name');
+    const modalNameErr    = document.getElementById('modal-name-error');
+    const modalCancel     = document.getElementById('modal-cancel');
+    const modalConfirm    = document.getElementById('modal-confirm');
+    const modalAvatarPrev = document.getElementById('modal-avatar-preview');
 
+    // Get initials from a name string
+    function getInitials(name) {
+        return name.trim().split(/\s+/).map(w => w[0]).join('').slice(0, 2).toUpperCase();
+    }
+
+    function applyLoggedInState(name) {
+        const initials = getInitials(name);
+        // Navbar pill
+        userAvatar.textContent   = initials;
+        userDispName.textContent = name;
+        userPill.classList.remove('hidden');
+        loginBtn.classList.add('hidden');
+        // Welcome banner
+        welcomeName.textContent = name;
+        welcomeBanner.classList.remove('hidden');
+    }
+
+    function applyLoggedOutState() {
+        userPill.classList.add('hidden');
+        loginBtn.classList.remove('hidden');
+        welcomeBanner.classList.add('hidden');
+    }
+
+    // Restore session from localStorage on page load
+    const savedUser = localStorage.getItem('portfolioUser');
+    if (savedUser) applyLoggedInState(savedUser);
+
+    // Open modal
     function openModal() {
         modalName.value = '';
         modalNameErr.textContent = '';
         modalName.classList.remove('input-error');
+        modalAvatarPrev.textContent = '';
+        modalAvatarPrev.classList.remove('has-name');
         loginModal.classList.remove('hidden');
-        setTimeout(() => modalName.focus(), 50);
+        setTimeout(() => modalName.focus(), 60);
     }
 
     function closeModal() {
         loginModal.classList.add('hidden');
     }
 
-    function doLogin(name) {
-        isLoggedIn = true;
-        currentUser = name;
-        welcomeName.textContent = name;
-        welcomeBanner.classList.remove('hidden');
-        loginBtn.textContent = 'Log Out';
-        loginBtn.classList.add('logged-in');
-        closeModal();
-    }
-
-    function doLogout() {
-        isLoggedIn = false;
-        currentUser = '';
-        welcomeBanner.classList.add('hidden');
-        loginBtn.textContent = 'Log In';
-        loginBtn.classList.remove('logged-in');
-    }
-
-    loginBtn.addEventListener('click', () => {
-        if (isLoggedIn) {
-            doLogout();
+    // Live avatar preview as user types
+    modalName.addEventListener('input', () => {
+        const val = modalName.value.trim();
+        if (val) {
+            modalAvatarPrev.textContent = getInitials(val);
+            modalAvatarPrev.classList.add('has-name');
         } else {
-            openModal();
+            modalAvatarPrev.textContent = '';
+            modalAvatarPrev.classList.remove('has-name');
         }
+        // Clear error on typing
+        modalNameErr.textContent = '';
+        modalName.classList.remove('input-error');
     });
 
-    logoutBtn.addEventListener('click', doLogout);
-
-    modalCancel.addEventListener('click', closeModal);
-
-    // Close modal when clicking the backdrop
-    loginModal.addEventListener('click', (e) => {
-        if (e.target === loginModal) closeModal();
-    });
-
-    // Confirm login on button click
-    modalConfirm.addEventListener('click', () => {
+    function doLogin() {
         const name = modalName.value.trim();
         if (!name) {
             modalNameErr.textContent = 'Please enter your name.';
             modalName.classList.add('input-error');
+            modalName.focus();
             return;
         }
-        doLogin(name);
-    });
+        localStorage.setItem('portfolioUser', name);
+        applyLoggedInState(name);
+        closeModal();
+    }
 
-    // Also confirm on Enter key
-    modalName.addEventListener('keydown', (e) => {
-        if (e.key === 'Enter') modalConfirm.click();
+    function doLogout() {
+        localStorage.removeItem('portfolioUser');
+        applyLoggedOutState();
+    }
+
+    loginBtn.addEventListener('click', openModal);
+    logoutBtn.addEventListener('click', doLogout);
+    modalCancel.addEventListener('click', closeModal);
+    modalConfirm.addEventListener('click', doLogin);
+    modalName.addEventListener('keydown', e => { if (e.key === 'Enter') doLogin(); });
+
+    // Close on backdrop click
+    loginModal.addEventListener('click', e => { if (e.target === loginModal) closeModal(); });
+
+    // Close on Escape key
+    document.addEventListener('keydown', e => {
+        if (e.key === 'Escape' && !loginModal.classList.contains('hidden')) closeModal();
     });
 
 
@@ -164,12 +181,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     tabBtns.forEach(btn => {
         btn.addEventListener('click', () => {
-            tabBtns.forEach(b => {
-                b.classList.remove('active');
-                b.setAttribute('aria-selected', 'false');
-            });
+            tabBtns.forEach(b => { b.classList.remove('active'); b.setAttribute('aria-selected', 'false'); });
             tabPanels.forEach(p => p.classList.remove('active'));
-
             btn.classList.add('active');
             btn.setAttribute('aria-selected', 'true');
             const target = document.getElementById(btn.dataset.tab);
@@ -184,11 +197,7 @@ document.addEventListener('DOMContentLoaded', () => {
         document.querySelectorAll('.skill-fill').forEach(bar => {
             const level = bar.getAttribute('data-level');
             bar.style.width = '0%';
-            requestAnimationFrame(() => {
-                requestAnimationFrame(() => {
-                    bar.style.width = level + '%';
-                });
-            });
+            requestAnimationFrame(() => requestAnimationFrame(() => { bar.style.width = level + '%'; }));
         });
     }
 
@@ -201,7 +210,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const projectGrid   = document.getElementById('project-grid');
     const noProjectsMsg = document.getElementById('no-projects-msg');
 
-    // Snapshot all cards and their data from the DOM
     const allCards = Array.from(document.querySelectorAll('.project-card')).map(card => ({
         el:       card,
         category: card.dataset.category,
@@ -213,36 +221,20 @@ document.addEventListener('DOMContentLoaded', () => {
     let activeSort   = 'default';
 
     function applyFilterAndSort() {
-        // Step 1: filter by category
-        let visible = allCards.filter(c =>
-            activeFilter === 'all' || c.category === activeFilter
-        );
+        // Filter
+        let visible = allCards.filter(c => activeFilter === 'all' || c.category === activeFilter);
 
-        // Step 2: sort
-        if (activeSort === 'name-asc') {
-            visible.sort((a, b) => a.name.localeCompare(b.name));
-        } else if (activeSort === 'name-desc') {
-            visible.sort((a, b) => b.name.localeCompare(a.name));
-        } else if (activeSort === 'date-desc') {
-            visible.sort((a, b) => b.date - a.date);
-        } else if (activeSort === 'date-asc') {
-            visible.sort((a, b) => a.date - b.date);
-        }
+        // Sort
+        if      (activeSort === 'name-asc')  visible.sort((a, b) => a.name.localeCompare(b.name));
+        else if (activeSort === 'name-desc') visible.sort((a, b) => b.name.localeCompare(a.name));
+        else if (activeSort === 'date-desc') visible.sort((a, b) => b.date - a.date);
+        else if (activeSort === 'date-asc')  visible.sort((a, b) => a.date - b.date);
 
-        // Step 3: detach all cards, re-attach in new order
-        allCards.forEach(c => {
-            c.el.style.display = 'none';
-            if (projectGrid.contains(c.el)) projectGrid.removeChild(c.el);
-        });
-        visible.forEach(c => {
-            c.el.style.display = '';
-            projectGrid.appendChild(c.el);
-        });
+        // Re-render
+        allCards.forEach(c => { c.el.style.display = 'none'; if (projectGrid.contains(c.el)) projectGrid.removeChild(c.el); });
+        visible.forEach(c => { c.el.style.display = ''; projectGrid.appendChild(c.el); });
 
-        // Step 4: empty state message
-        if (noProjectsMsg) {
-            noProjectsMsg.classList.toggle('hidden', visible.length > 0);
-        }
+        if (noProjectsMsg) noProjectsMsg.classList.toggle('hidden', visible.length > 0);
     }
 
     filterBtns.forEach(btn => {
@@ -255,10 +247,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     if (sortSelect) {
-        sortSelect.addEventListener('change', () => {
-            activeSort = sortSelect.value;
-            applyFilterAndSort();
-        });
+        sortSelect.addEventListener('change', () => { activeSort = sortSelect.value; applyFilterAndSort(); });
     }
 
 
@@ -284,15 +273,14 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     async function fetchTrivia() {
-        const url = 'https://opentdb.com/api.php?amount=5&category=18&type=multiple';
         try {
-            const res = await fetch(url);
+            const res = await fetch('https://opentdb.com/api.php?amount=5&category=18&type=multiple');
             if (!res.ok) throw new Error('Bad response');
             const data = await res.json();
             if (data.response_code !== 0 || !data.results.length) throw new Error('No results');
             triviaQueue = data.results;
             showNextQuestion();
-        } catch (err) {
+        } catch {
             triviaLoading.classList.add('hidden');
             triviaError.classList.remove('hidden');
         }
@@ -329,9 +317,7 @@ document.addEventListener('DOMContentLoaded', () => {
             btn.addEventListener('click', () => {
                 if (answered) return;
                 answered = true;
-
                 const correctText = answers.find(a => a.correct).text;
-
                 if (ans.correct) {
                     btn.classList.add('correct');
                     triviaFeedback.textContent = '✅ Correct!';
@@ -346,7 +332,6 @@ document.addEventListener('DOMContentLoaded', () => {
                         if (b.textContent === correctText) b.classList.add('correct');
                     });
                 }
-
                 triviaAnswers.querySelectorAll('.trivia-answer-btn').forEach(b => b.disabled = true);
                 triviaNext.classList.remove('hidden');
             });
@@ -363,7 +348,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
     // =============================
-    // Quote Widget — Quotable API
+    // Quote Widget — Quotable API (with fallback)
     // =============================
     const quoteLoading = document.getElementById('quote-loading');
     const quoteBlock   = document.getElementById('quote-block');
@@ -372,8 +357,18 @@ document.addEventListener('DOMContentLoaded', () => {
     const quoteError   = document.getElementById('quote-error');
     const quoteRefresh = document.getElementById('quote-refresh');
 
+    const fallbackQuotes = [
+        { content: "Any sufficiently advanced technology is indistinguishable from magic.", author: "Arthur C. Clarke" },
+        { content: "It's not a bug, it's an undocumented feature.", author: "Unknown" },
+        { content: "First, solve the problem. Then, write the code.", author: "John Johnson" },
+        { content: "Code is like humor. When you have to explain it, it's bad.", author: "Cory House" },
+        { content: "The best error message is the one that never shows up.", author: "Thomas Fuchs" },
+        { content: "Simplicity is the soul of efficiency.", author: "Austin Freeman" }
+    ];
+
+    let lastFallbackIndex = -1;
+
     async function fetchQuote() {
-        // Show loading state
         quoteBlock.classList.add('hidden');
         quoteError.classList.add('hidden');
         quoteLoading.classList.remove('hidden');
@@ -383,24 +378,18 @@ document.addEventListener('DOMContentLoaded', () => {
             const res = await fetch('https://api.quotable.io/random?tags=technology|science|education');
             if (!res.ok) throw new Error('Bad response');
             const data = await res.json();
-
             quoteText.textContent   = data.content;
             quoteAuthor.textContent = '— ' + data.author;
-
             quoteLoading.classList.add('hidden');
             quoteBlock.classList.remove('hidden');
-        } catch (err) {
-            // Fallback: show a hardcoded quote if the API fails
-            const fallbacks = [
-                { content: "Any sufficiently advanced technology is indistinguishable from magic.", author: "Arthur C. Clarke" },
-                { content: "It's not a bug, it's an undocumented feature.", author: "Unknown" },
-                { content: "First, solve the problem. Then, write the code.", author: "John Johnson" },
-                { content: "Code is like humor. When you have to explain it, it's bad.", author: "Cory House" }
-            ];
-            const pick = fallbacks[Math.floor(Math.random() * fallbacks.length)];
+        } catch {
+            // Pick a fallback quote, avoiding repeating the last one
+            let idx;
+            do { idx = Math.floor(Math.random() * fallbackQuotes.length); } while (idx === lastFallbackIndex);
+            lastFallbackIndex = idx;
+            const pick = fallbackQuotes[idx];
             quoteText.textContent   = pick.content;
             quoteAuthor.textContent = '— ' + pick.author;
-
             quoteLoading.classList.add('hidden');
             quoteBlock.classList.remove('hidden');
         } finally {
@@ -437,7 +426,6 @@ document.addEventListener('DOMContentLoaded', () => {
         e.preventDefault();
         clearErrors();
         formSuccess.classList.add('hidden');
-
         let valid = true;
 
         if (!nameInput.value.trim()) {
@@ -445,7 +433,6 @@ document.addEventListener('DOMContentLoaded', () => {
             nameInput.classList.add('input-error');
             valid = false;
         }
-
         if (!emailInput.value.trim()) {
             emailError.textContent = 'Please enter your email.';
             emailInput.classList.add('input-error');
@@ -455,7 +442,6 @@ document.addEventListener('DOMContentLoaded', () => {
             emailInput.classList.add('input-error');
             valid = false;
         }
-
         if (!msgInput.value.trim()) {
             msgError.textContent = 'Please enter a message.';
             msgInput.classList.add('input-error');

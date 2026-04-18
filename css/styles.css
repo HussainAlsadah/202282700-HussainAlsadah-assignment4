@@ -474,7 +474,7 @@ header {
     font-size: 0.85em;
     text-transform: uppercase;
     letter-spacing: 0.5px;
-    color: #7a9ab5;
+    color: #4a6a80;
 }
 
 .filter-group, .sort-group { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
@@ -658,7 +658,7 @@ header {
     font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 1px;
-    color: #7a9ab5;
+    color: #4a6a80;
     margin-bottom: 10px;
 }
 
@@ -721,7 +721,7 @@ header {
 .quote-author {
     font-size: 0.85em;
     font-weight: 700;
-    color: #7a9ab5;
+    color: #4a6a80;
     text-transform: uppercase;
     letter-spacing: 0.5px;
     text-align: center;

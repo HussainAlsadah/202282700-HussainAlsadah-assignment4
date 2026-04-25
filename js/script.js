@@ -228,6 +228,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const sortSelect    = document.getElementById('sort-select');
     const projectGrid   = document.getElementById('project-grid');
     const noProjectsMsg = document.getElementById('no-projects-msg');
+    const spotlightBtn  = document.getElementById('project-spotlight-btn');
+    const spotlightText = document.getElementById('spotlight-text');
 
     const allCards = Array.from(document.querySelectorAll('.project-card')).map(card => ({
         el:       card,
@@ -267,6 +269,24 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (sortSelect) {
         sortSelect.addEventListener('change', () => { activeSort = sortSelect.value; applyFilterAndSort(); });
+    }
+
+    if (spotlightBtn && spotlightText) {
+        spotlightBtn.addEventListener('click', () => {
+            const visibleCards = allCards.filter(c => activeFilter === 'all' || c.category === activeFilter);
+
+            if (!visibleCards.length) {
+                spotlightText.textContent = 'No visible projects match the current filter, so clear the filter or choose another one first.';
+                return;
+            }
+
+            allCards.forEach(c => c.el.classList.remove('spotlight-active'));
+
+            const selected = visibleCards[Math.floor(Math.random() * visibleCards.length)];
+            selected.el.classList.add('spotlight-active');
+            selected.el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            spotlightText.textContent = 'Spotlight: ' + selected.name + ' is highlighted below. This project shows one of the main directions in my portfolio.';
+        });
     }
 
 

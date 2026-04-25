@@ -33,6 +33,15 @@ h2 {
 
 .hidden { display: none !important; }
 
+.eyebrow {
+    font-size: 0.85rem;
+    font-weight: 800;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: #2a7ab5;
+    margin-bottom: 16px;
+}
+
 /* =============================
    Visitor Timer Bar
    ============================= */
@@ -53,11 +62,155 @@ h2 {
 /* =============================
    Section backgrounds (alternating)
    ============================= */
+#hero        { background:
+    radial-gradient(circle at top right, rgba(100, 181, 246, 0.18), transparent 30%),
+    linear-gradient(135deg, #eef5fb 0%, #f8fbfe 100%);
+}
 #about       { background: linear-gradient(135deg, #f5f7fa 0%, #f0f4f8 100%); }
 #projects    { background: linear-gradient(135deg, #dfe8f5 0%, #e8f0fa 100%); }
 #hobbies     { background: linear-gradient(135deg, #f5f7fa 0%, #f0f4f8 100%); }
 #interactive { background: linear-gradient(135deg, #dfe8f5 0%, #e8f0fa 100%); }
 #contact     { background: linear-gradient(135deg, #f5f7fa 0%, #f0f4f8 100%); }
+
+/* =============================
+   Hero
+   ============================= */
+.hero-section {
+    padding: 88px 20px 78px;
+}
+
+.hero-grid {
+    display: grid;
+    grid-template-columns: 1.3fr 0.9fr;
+    gap: 28px;
+    align-items: stretch;
+}
+
+.hero-copy,
+.hero-panel {
+    background: rgba(255, 255, 255, 0.78);
+    backdrop-filter: blur(8px);
+    border: 1px solid rgba(26, 58, 82, 0.08);
+    box-shadow: 0 18px 45px rgba(15, 40, 71, 0.08);
+}
+
+.hero-copy {
+    padding: 40px;
+    border-radius: 28px;
+}
+
+.hero-title {
+    text-align: left;
+    font-size: clamp(1.9rem, 3.2vw, 2.8rem);
+    line-height: 1.1;
+    margin-bottom: 18px;
+    max-width: 16ch;
+}
+
+.hero-description {
+    font-size: 1.03rem;
+    color: #4c6274;
+    max-width: 62ch;
+    margin-bottom: 26px;
+}
+
+.hero-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-bottom: 28px;
+}
+
+.primary-link-btn,
+.secondary-link-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 12px 20px;
+    border-radius: 999px;
+    font-weight: 700;
+    text-decoration: none;
+    transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease, color 0.2s ease;
+}
+
+.primary-link-btn {
+    background: linear-gradient(135deg, #17344f, #24597f);
+    color: white;
+    box-shadow: 0 12px 24px rgba(23, 52, 79, 0.18);
+}
+
+.secondary-link-btn {
+    border: 1.5px solid rgba(26, 58, 82, 0.16);
+    color: #17344f;
+    background: rgba(255, 255, 255, 0.72);
+}
+
+.primary-link-btn:hover,
+.secondary-link-btn:hover {
+    transform: translateY(-2px);
+}
+
+.hero-metrics {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 14px;
+}
+
+.metric-card {
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.95), rgba(240, 246, 252, 0.92));
+    border: 1px solid rgba(26, 58, 82, 0.08);
+    border-radius: 18px;
+    padding: 18px 16px;
+}
+
+.metric-card strong {
+    display: block;
+    font-size: 1.2rem;
+    color: #17344f;
+    margin-bottom: 4px;
+}
+
+.metric-card span {
+    font-size: 0.88rem;
+    color: #5d7487;
+}
+
+.hero-panel {
+    border-radius: 24px;
+    padding: 32px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.hero-panel-label,
+.spotlight-label {
+    font-size: 0.8rem;
+    font-weight: 800;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: #2a7ab5;
+    margin-bottom: 12px;
+}
+
+.hero-panel h3 {
+    color: #17344f;
+    font-size: 1.45rem;
+    line-height: 1.3;
+    margin-bottom: 14px;
+}
+
+.hero-panel p,
+.hero-points li {
+    color: #546e7a;
+}
+
+.hero-points {
+    margin-top: 18px;
+    padding-left: 20px;
+    display: grid;
+    gap: 10px;
+}
 
 /* =============================
    Navbar
@@ -407,6 +560,38 @@ header {
 .tab-panel { display: none; animation: fadeIn 0.3s ease; }
 .tab-panel.active { display: block; }
 
+.about-layout {
+    display: grid;
+    grid-template-columns: 1.35fr 0.9fr;
+    gap: 24px;
+    align-items: start;
+}
+
+.about-story,
+.about-highlights {
+    background: white;
+    border-radius: 18px;
+    padding: 24px;
+    border: 1px solid rgba(26, 58, 82, 0.06);
+    box-shadow: 0 8px 24px rgba(15, 40, 71, 0.06);
+}
+
+.about-story p + p {
+    margin-top: 16px;
+}
+
+.about-highlights h3 {
+    color: #17344f;
+    margin-bottom: 14px;
+}
+
+.highlight-list {
+    padding-left: 18px;
+    display: grid;
+    gap: 10px;
+    color: #546e7a;
+}
+
 @keyframes fadeIn {
     from { opacity: 0; transform: translateY(8px); }
     to   { opacity: 1; transform: translateY(0); }
@@ -467,6 +652,46 @@ header {
     border-radius: 12px;
     box-shadow: 0 2px 10px rgba(15, 40, 71, 0.07);
     border: 1px solid rgba(26, 58, 82, 0.06);
+}
+
+.spotlight-panel {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+    padding: 22px 24px;
+    margin-bottom: 24px;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.95), rgba(244, 248, 252, 0.92));
+    border-radius: 18px;
+    border: 1px solid rgba(26, 58, 82, 0.08);
+    box-shadow: 0 10px 26px rgba(15, 40, 71, 0.07);
+}
+
+.spotlight-panel h3 {
+    color: #17344f;
+    margin-bottom: 8px;
+}
+
+.spotlight-panel p:last-child {
+    color: #546e7a;
+}
+
+.spotlight-btn {
+    padding: 12px 18px;
+    border: none;
+    border-radius: 999px;
+    background: linear-gradient(135deg, #17344f, #2a7ab5);
+    color: white;
+    font-weight: 700;
+    cursor: pointer;
+    font-family: inherit;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    white-space: nowrap;
+}
+
+.spotlight-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 20px rgba(23, 52, 79, 0.18);
 }
 
 .controls-label {
@@ -538,6 +763,15 @@ header {
     border-color: rgba(100, 181, 246, 0.2);
 }
 
+.project-card.spotlight-active {
+    border-color: #2a7ab5;
+    box-shadow: 0 24px 52px rgba(42, 122, 181, 0.34);
+    transform: translateY(-8px) scale(1.03);
+    outline: 4px solid rgba(100, 181, 246, 0.45);
+    outline-offset: 2px;
+    background: linear-gradient(180deg, #ffffff 0%, #f1f8ff 100%);
+}
+
 .project-card h3 { margin-bottom: 15px; color: #1a3a52; font-size: 1.3em; font-weight: 700; letter-spacing: -0.3px; }
 .project-card p { color: #546e7a; line-height: 1.8; font-size: 0.95em; }
 
@@ -563,6 +797,22 @@ header {
     font-size: 0.85em;
     border-radius: 6px;
     box-shadow: 0 6px 18px rgba(15,40,71,0.25);
+}
+
+.project-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 16px;
+}
+
+.project-tags span {
+    padding: 6px 10px;
+    border-radius: 999px;
+    font-size: 0.78rem;
+    font-weight: 700;
+    background: #eef5fb;
+    color: #24597f;
 }
 
 /* =============================
@@ -733,6 +983,13 @@ header {
    ============================= */
 .contact-form { display: flex; flex-direction: column; gap: 6px; max-width: 500px; margin: auto; }
 
+.contact-intro {
+    text-align: center;
+    color: #546e7a;
+    max-width: 640px;
+    margin: -10px auto 26px;
+}
+
 .form-field { display: flex; flex-direction: column; gap: 4px; margin-bottom: 10px; }
 
 .contact-form input,
@@ -838,6 +1095,12 @@ footer {
 
 .dark-mode h2 { color: #e0e0e0; }
 
+.dark-mode #hero {
+    background:
+        radial-gradient(circle at top right, rgba(100, 181, 246, 0.12), transparent 30%),
+        linear-gradient(135deg, #0f1b28 0%, #132131 100%) !important;
+}
+
 .dark-mode #about,
 .dark-mode #hobbies,
 .dark-mode #contact {
@@ -864,6 +1127,44 @@ footer {
     color: #90c4e8;
 }
 .dark-mode .welcome-banner strong { color: #64b5f6; }
+
+.dark-mode .eyebrow,
+.dark-mode .hero-panel-label,
+.dark-mode .spotlight-label { color: #64b5f6; }
+
+.dark-mode .hero-copy,
+.dark-mode .hero-panel,
+.dark-mode .about-story,
+.dark-mode .about-highlights,
+.dark-mode .spotlight-panel {
+    background: rgba(26, 37, 47, 0.92);
+    border-color: rgba(100, 181, 246, 0.12);
+}
+
+.dark-mode .hero-title,
+.dark-mode .hero-panel h3,
+.dark-mode .about-highlights h3 { color: #d7e6f5; }
+
+.dark-mode .hero-description,
+.dark-mode .hero-panel p,
+.dark-mode .hero-points li,
+.dark-mode .highlight-list,
+.dark-mode .contact-intro,
+.dark-mode .spotlight-panel p:last-child { color: #a9bac7; }
+
+.dark-mode .metric-card {
+    background: linear-gradient(180deg, rgba(20, 33, 49, 0.95), rgba(24, 39, 58, 0.92));
+    border-color: rgba(100, 181, 246, 0.12);
+}
+
+.dark-mode .metric-card strong { color: #d7e6f5; }
+.dark-mode .metric-card span { color: #93a7b8; }
+
+.dark-mode .secondary-link-btn {
+    background: rgba(100, 181, 246, 0.08);
+    border-color: rgba(100, 181, 246, 0.2);
+    color: #d7e6f5;
+}
 
 /* Modal dark */
 .dark-mode .modal { background: #1a252f; }
@@ -909,6 +1210,12 @@ footer {
 .dark-mode .project-badge { background: rgba(100,181,246,0.12); color: #64b5f6; }
 .dark-mode .project-card h3 { color: #64b5f6; }
 .dark-mode .project-card p { color: #b0bec5; }
+.dark-mode .project-tags span { background: rgba(100, 181, 246, 0.1); color: #8ec7f1; }
+.dark-mode .project-card.spotlight-active {
+    box-shadow: 0 24px 52px rgba(100, 181, 246, 0.24);
+    outline-color: rgba(100, 181, 246, 0.4);
+    background: linear-gradient(180deg, #1d2c3a 0%, #203548 100%);
+}
 
 /* Hobby cards dark */
 .dark-mode .hobby-card { background-color: #1a252f; border-color: rgba(100, 181, 246, 0.1); box-shadow: 0 4px 15px rgba(0,0,0,0.3); }
@@ -951,6 +1258,7 @@ footer {
 @media (max-width: 768px) {
     .section { padding: 60px 20px; }
     h2 { font-size: 1.8em; margin-bottom: 30px; }
+    .hero-section { padding: 64px 20px 56px; }
 
     .navbar { flex-wrap: wrap; gap: 10px; padding: 10px 20px; }
 
@@ -974,6 +1282,27 @@ footer {
     .nav-links a { color: white; }
 
     .tab-btn { padding: 8px 14px; font-size: 0.9em; }
+    .hero-grid,
+    .about-layout,
+    .hero-metrics {
+        grid-template-columns: 1fr;
+    }
+
+    .hero-copy,
+    .hero-panel {
+        padding: 24px;
+        border-radius: 22px;
+    }
+
+    .hero-title {
+        font-size: 1.8rem;
+        max-width: none;
+    }
+
+    .spotlight-panel {
+        flex-direction: column;
+        align-items: flex-start;
+    }
 
     .project-controls { gap: 12px; }
     .filter-group, .sort-group { gap: 6px; }

@@ -19,6 +19,7 @@
                 </svg>
             </button>
             <ul class="nav-links">
+                <li><a href="#hero">Home</a></li>
                 <li><a href="#about">About</a></li>
                 <li><a href="#projects">Projects</a></li>
                 <li><a href="#hobbies">Hobbies</a></li>
@@ -55,6 +56,47 @@
     </div>
 
     <main id="main-content">
+    <!-- Hero Section -->
+    <section id="hero" class="hero-section">
+        <div class="container hero-grid">
+            <div class="hero-copy">
+                <p class="eyebrow">Software Engineering Student | KFUPM</p>
+                <h2 class="hero-title">I build polished web experiences with practical AI solutions.</h2>
+                <p class="hero-description">
+                    This portfolio brings together my coursework, personal interests, and hands-on experiments in frontend development,
+                    JavaScript interactivity, and practical AI ideas.
+                </p>
+                <div class="hero-actions">
+                    <a class="primary-link-btn" href="#projects">View My Work</a>
+                    <a class="secondary-link-btn" href="#contact">Contact Me</a>
+                </div>
+                <div class="hero-metrics" aria-label="Portfolio highlights">
+                    <article class="metric-card">
+                        <strong>3</strong>
+                        <span>featured portfolio projects</span>
+                    </article>
+                    <article class="metric-card">
+                        <strong>AI + Web</strong>
+                        <span>main technical focus</span>
+                    </article>
+                </div>
+            </div>
+            <aside class="hero-panel" aria-label="Professional summary">
+                <p class="hero-panel-label">Current focus</p>
+                <h3>Building a portfolio that feels like a finished product, not just a course submission.</h3>
+                <p>
+                    I enjoy combining thoughtful interface design with JavaScript logic, then strengthening the result with testing,
+                    iteration, and practical documentation.
+                </p>
+                <ul class="hero-points">
+                    <li>Responsive front-end development with HTML, CSS, and JavaScript</li>
+                    <li>Interactive UI features with state, validation, and API integration</li>
+                    <li>Growing interest in AI-assisted products and intelligent study tools</li>
+                </ul>
+            </aside>
+        </div>
+    </section>
+
     <!-- About Section (Tabbed) -->
     <section id="about" class="section">
         <div class="container">
@@ -65,11 +107,29 @@
                 <button class="tab-btn" role="tab" aria-selected="false" data-tab="experience-tab">Experience</button>
             </div>
             <div class="tab-panels">
-
                 <div id="about-tab" class="tab-panel active" role="tabpanel">
-                    <p>I am a Software Engineering student studying at KFUPM university, passionate about developing software
-                    in addition to applying Artificial Intelligence in niche domains.
-                    I enjoy building applications and learning new technologies.</p>
+                    <div class="about-layout">
+                        <div class="about-story">
+                            <p>
+                                I am a Software Engineering student at KFUPM who enjoys building software that is practical,
+                                polished, and easy to use. I am especially interested in web development because it combines
+                                design, logic, and problem-solving in a very visible way.
+                            </p>
+                            <p>
+                                Alongside web development, I like exploring how Artificial Intelligence can support learning,
+                                productivity, and niche use cases. My goal is to keep improving as a developer by building
+                                projects that are both technically solid and genuinely useful.
+                            </p>
+                        </div>
+                        <div class="about-highlights">
+                            <h3>What I bring</h3>
+                            <ul class="highlight-list">
+                                <li>Strong interest in clean UI and interaction design</li>
+                                <li>Comfortable building front-end logic with vanilla JavaScript</li>
+                                <li>Curious, iterative workflow with a focus on continuous improvement</li>
+                            </ul>
+                        </div>
+                    </div>
                 </div>
 
                 <div id="skills-tab" class="tab-panel" role="tabpanel">
@@ -127,6 +187,14 @@
         <div class="container">
             <h2>Projects</h2>
 
+            <div class="spotlight-panel">
+                <div>
+                    <h3>Project Spotlight</h3>
+                    <p id="spotlight-text">Tap the button to randomly highlight one featured project and jump directly to it.</p>
+                </div>
+                <button id="project-spotlight-btn" class="spotlight-btn" type="button">Pick a Project</button>
+            </div>
+
             <!-- Filter & Sort Controls -->
             <div class="project-controls">
                 <div class="filter-group">
@@ -156,6 +224,11 @@
                     </div>
                     <h3>AI Study Assistant</h3>
                     <p>A web app that uses basic NLP concepts to generate quiz questions and study recommendations for students.</p>
+                    <div class="project-tags">
+                        <span>AI concepts</span>
+                        <span>student-focused</span>
+                        <span>web app</span>
+                    </div>
                 </div>
 
                 <div class="project-card" data-category="JS" data-date="2024" data-name="Task Manager App">
@@ -165,6 +238,11 @@
                     </div>
                     <h3>Task Manager App</h3>
                     <p>A productivity app built with JavaScript that allows users to track tasks, set deadlines, and manage priorities.</p>
+                    <div class="project-tags">
+                        <span>JavaScript</span>
+                        <span>productivity</span>
+                        <span>UI logic</span>
+                    </div>
                 </div>
 
                 <div class="project-card" data-category="Web" data-date="2023" data-name="Portfolio Website">
@@ -174,6 +252,11 @@
                     </div>
                     <h3>Portfolio Website</h3>
                     <p>This personal portfolio site built from scratch with HTML, CSS, and vanilla JavaScript, featuring dark mode, API integration, and a responsive layout.</p>
+                    <div class="project-tags">
+                        <span>responsive</span>
+                        <span>API integration</span>
+                        <span>portfolio</span>
+                    </div>
                 </div>
             </div>
 
@@ -246,6 +329,7 @@
     <section id="contact" class="section">
         <div class="container">
             <h2>Contact Me</h2>
+            <p class="contact-intro">Interested in discussing web development, software engineering, or AI ideas? Send me a message below.</p>
             <form class="contact-form" id="contact-form" novalidate>
                 <div class="form-field">
                     <input type="text" id="form-name" placeholder="Your Name">

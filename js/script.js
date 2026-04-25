@@ -240,6 +240,19 @@ document.addEventListener('DOMContentLoaded', () => {
 
     let activeFilter = 'all';
     let activeSort   = 'default';
+    let lastSpotlightName = '';
+
+    function setProjectSpotlight(cardData) {
+        allCards.forEach(c => c.el.classList.remove('spotlight-active'));
+
+        if (!cardData) return;
+
+        cardData.el.classList.add('spotlight-active');
+        lastSpotlightName = cardData.name;
+        if (spotlightText) {
+            spotlightText.textContent = 'Spotlight: ' + cardData.name + ' is highlighted below. This project shows one of the main directions in my portfolio.';
+        }
+    }
 
     function applyFilterAndSort() {
         // Filter
@@ -280,14 +293,21 @@ document.addEventListener('DOMContentLoaded', () => {
                 return;
             }
 
-            allCards.forEach(c => c.el.classList.remove('spotlight-active'));
+            const selectableCards = visibleCards.length > 1
+                ? visibleCards.filter(c => c.name !== lastSpotlightName)
+                : visibleCards;
 
-            const selected = visibleCards[Math.floor(Math.random() * visibleCards.length)];
-            selected.el.classList.add('spotlight-active');
+            const selected = selectableCards[Math.floor(Math.random() * selectableCards.length)];
+            setProjectSpotlight(selected);
             selected.el.scrollIntoView({ behavior: 'smooth', block: 'center' });
-            spotlightText.textContent = 'Spotlight: ' + selected.name + ' is highlighted below. This project shows one of the main directions in my portfolio.';
         });
     }
+
+    allCards.forEach(cardData => {
+        cardData.el.addEventListener('click', () => {
+            setProjectSpotlight(cardData);
+        });
+    });
 
 
     // =============================

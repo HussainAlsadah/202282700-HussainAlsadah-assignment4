@@ -1,102 +1,213 @@
 # Technical Documentation
 
-Project: 202282700-HussainAlsadah-assignment3
+Project: 202282700-HussainAlsadah-assignment4
 
-Date: 2026-04-18
+Date: 2026-04-25
 
-Cloning link: https://github.com/HussainAlsadah/202282700-HussainAlsadah-assignment3.git
+Repository: https://github.com/HussainAlsadah/202282700-HussainAlsadah-assignment4.git
 
-Overview
---------
-This is the documentation for the portfolio assessment (Assignment 3), which builds on Assignment 2 by adding external API integrations, a login/logout system with session persistence, project filtering and sorting, a visitor timer, and a dedicated Interactive section. The site remains a static single-page portfolio built with HTML, CSS, and JavaScript.
+## Overview
 
-Repository Structure
---------------------
-assignment-3/
-- README.md
-- index.html
-- css/
-    - styles.css
-- js/
-    - script.js
-- assets/
-    - images/
-        - AI-ProjectPlaceHolder.png
-        - computer-stuff.jpg
-        - CV-Example.png
-        - task-manager-placeholder.png
-- docs/
-    - ai-usage-report.md
-    - technical-documentation.md
-- .gitignore
+This document describes the final personal portfolio web application submitted for Assignment 4. The project continues the earlier portfolio work and refines it into a more polished final product with improved layout, stronger presentation, interactive features, and clearer documentation.
 
-Key Files & Responsibilities
-----------------------------
-- `index.html`
-    - Contains the page sections: About (tabbed), Projects, Hobbies, Interactive, Contact, and Footer.
-    - The About section remains split into three tabs: About, Skills, and Experience.
-    - A visitor timer bar sits below the header and is always visible, counting time spent on the page.
-    - A welcome banner appears below the header when a user is logged in, showing their name.
-    - The Projects section includes filter buttons and a sort dropdown above the project grid; each card has `data-category`, `data-date`, and `data-name` attributes used by the filter/sort logic.
-    - The Interactive section contains the Tech Trivia widget and the Quote widget side by side.
-    - The Contact form uses `novalidate` and custom JavaScript validation with inline error messages.
-    - A login modal at the bottom of `<body>` handles the login flow with a live avatar preview.
-    - The navbar includes a `.nav-auth` area that shows a login button when logged out and a user pill with initials and a logout icon when logged in.
-    - The `<script>` tag is placed at the bottom of `<body>` to ensure the DOM is fully loaded before the script runs.
+The website is a static single-page application built with:
 
-- `css/styles.css`
-    - Global resets and system font stack.
-    - Sectioned styles for header, timer bar, welcome banner, login modal, nav auth area, tabs, skill bars, experience timeline, projects, project controls, hobbies, interactive widgets, contact form, and footer.
-    - Timer bar styles: `.timer-bar` — slim banner always visible below the header.
-    - Nav auth styles: `.nav-auth`, `.login-btn`, `.user-pill`, `.user-avatar`, `.user-display-name`, `.logout-btn`.
-    - Modal styles: `.modal-overlay`, `.modal`, `.modal-header`, `.modal-avatar-preview` with a `modalIn` scale/fade entry animation.
-    - Project control styles: `.project-controls`, `.filter-btn`, `#sort-select` with active state for the selected filter.
-    - Interactive grid styles: `.interactive-grid` as a flex container; `.trivia-widget` and `.quote-widget` share base styles via `.widget-title`, `.widget-btn`, and `.widget-error`.
-    - Quote styles: `.quote-text` with CSS `::before`/`::after` pseudo-elements for decorative quotation marks.
-    - Responsive rules under `@media (max-width: 768px)`; interactive grid stacks vertically, modal fits small screens.
-    - Dark mode styles applied by toggling the `dark-mode` class on `<body>`, covering all new and existing components.
+- HTML for structure
+- CSS for styling, layout, responsiveness, and dark mode
+- JavaScript for interactivity, validation, state persistence, and API integration
 
-- `js/script.js`
-    - Wrapped in `DOMContentLoaded` to ensure DOM nodes exist before attaching listeners.
-    - Implements:
-        - Smooth scrolling for internal navigation links.
-        - Theme toggle (adds/removes `dark-mode` on `<body>`, updates SVG icon, saves preference to `localStorage`).
-        - Theme persistence via `localStorage`: saved preference is restored on page load.
-        - Mobile nav toggle (adds/removes `.open` on `.nav-links` and manages `aria-expanded`).
-        - Visitor timer: uses `setInterval` to increment a counter every second from page load; `formatTime()` formats raw seconds into a readable string and updates the `#visit-timer` element.
-        - Login/logout: `getInitials()` extracts up to two initials from a name; `applyLoggedInState()` and `applyLoggedOutState()` update the navbar pill, welcome banner, and login button; the user's name is saved to and restored from `localStorage` so the session persists across page refreshes; the modal closes on Cancel, backdrop click, or Escape key; a live avatar preview updates in real time as the user types their name.
-        - Tab switching: activates the clicked tab panel, deactivates others, triggers skill bar animation when the Skills tab opens.
-        - Skill bar animation: resets bar widths to 0% then animates to their `data-level` value using `requestAnimationFrame`.
-        - Project filter & sort: snapshots all `.project-card` elements into an array on load; `applyFilterAndSort()` filters by category, sorts by the selected order, detaches all cards from the DOM, and re-appends them in the new order; shows an empty-state message if no cards are visible.
-        - Tech Trivia: fetches 5 questions at a time from the Open Trivia DB API (category: Science & Computers), renders answer buttons, handles correct/wrong selection with visual feedback, shows a "Next Question" button after answering, refetches when the queue is empty, and displays a friendly error message if the API call fails.
-        - Quotes widget: fetches a random quote from the Quotable API on load and on button click; falls back to a hardcoded list of 6 quotes if the API is unreachable, avoiding repeating the last shown quote.
-        - Contact form validation: checks name, email (including format via regex), and message fields on submit; shows inline error messages and red borders on invalid fields; shows a green success message and resets the form on valid submission.
+## Repository Structure
 
-Assets
-------
-- `assets/images/AI-ProjectPlaceHolder.png` — used for the AI Study Assistant project card preview.
-- `assets/images/task-manager-placeholder.png` — used for the Task Manager project card preview.
-- `assets/images/computer-stuff.jpg` — used for the Portfolio Website project card preview.
-- `assets/images/CV-Example.png` — present in assets but not currently used.
+```text
+202282700-HussainAlsadah-assignment4/
+├── README.md
+├── index.html
+├── css/
+│   └── styles.css
+├── js/
+│   └── script.js
+├── assets/
+│   └── images/
+├── docs/
+│   ├── ai-usage-report.md
+│   └── technical-documentation.md
+├── presentation/
+│   ├── slides.pdf
+│   ├── demo-video.mp4
+│   └── .gitkeep
+└── .gitignore
+```
 
-How to Run Locally
--------------------
+## Page Structure
+
+The page is organized into the following sections:
+
+1. Header and navigation
+2. Welcome banner
+3. Visitor timer bar
+4. Hero section
+5. About section
+6. Projects section
+7. Hobbies section
+8. Interactive section
+9. Contact section
+10. Footer
+11. Login modal
+
+## Key Files and Responsibilities
+
+### `index.html`
+
+Contains the full structure of the portfolio page.
+
+Important parts:
+
+- Sticky navigation with desktop and mobile support
+- Personalized login area in the navbar
+- Hero section with portfolio introduction and highlight cards
+- Tabbed About section with About, Skills, and Experience panels
+- Projects section with filter controls, sort control, and spotlight button
+- Hobbies section with personal interest cards
+- Interactive section with trivia and quote widgets
+- Contact form with custom validation feedback
+- Login modal for session personalization
+
+### `css/styles.css`
+
+Contains all visual styling for the website.
+
+Important responsibilities:
+
+- Global reset and base typography
+- Hero section layout and card styling
+- Responsive layouts for mobile screens
+- Navigation, modal, and form styling
+- Project card styles, tags, and spotlight highlight state
+- Dark mode styles for all major sections
+- Visual consistency across content cards and widgets
+
+### `js/script.js`
+
+Contains all client-side interactive behavior.
+
+Important responsibilities:
+
+- Smooth scrolling for internal links
+- Dark mode toggle and saved preference using `localStorage`
+- Mobile menu open/close logic
+- Visitor timer update logic
+- Login/logout behavior with saved session
+- Live avatar preview in the login modal
+- Tab switching for the About section
+- Skill bar animation
+- Project filtering and sorting
+- Project spotlight logic
+- Trivia API integration
+- Quote API integration with fallback quotes
+- Contact form validation and success handling
+
+## Implemented Features
+
+### 1. Responsive navigation
+
+- Sticky navigation bar
+- Mobile hamburger menu
+- Smooth scrolling between page sections
+
+### 2. Theme system
+
+- Light and dark themes
+- Theme preference is saved in `localStorage`
+
+### 3. Personalized visit flow
+
+- Login modal accepts a visitor name
+- Navbar updates with initials and display name
+- Welcome banner appears after login
+- Session persists after refresh using `localStorage`
+
+### 4. About section interactions
+
+- Tabbed content panels
+- Skills tab includes animated progress bars
+
+### 5. Project browsing tools
+
+- Filter projects by category
+- Sort projects by name or date
+- Highlight a random project with the spotlight button
+- Allow clicking a project card to apply the same highlight effect
+- Prevent the spotlight button from choosing the same project twice in a row when more than one choice is available
+
+### 6. Interactive widgets
+
+- Tech trivia uses Open Trivia DB
+- Quote widget uses Quotable API
+- Quote widget falls back to local quote data if the API is unavailable
+- Trivia widget shows a visible error message if loading fails
+
+### 7. Contact form validation
+
+- Required field checking
+- Email format validation
+- Inline error messages
+- Success message after valid submission
+
+## Data and State Management
+
+This project uses browser-side state only. No backend or database is used.
+
+Saved data in `localStorage`:
+
+- selected theme
+- saved visitor name
+
+Temporary runtime state includes:
+
+- current project filter
+- current project sort option
+- last spotlighted project
+- trivia queue and answer state
+- timer count
+
+## Assets
+
+Current image assets in use:
+
+- `assets/images/AI-ProjectPlaceHolder.png`
+- `assets/images/task-manager-placeholder.png`
+- `assets/images/computer-stuff.jpg`
+
+These images are used as previews inside the Projects section.
+
+## How to Run Locally
+
 1. Clone the repository:
-   https://github.com/HussainAlsadah/202282700-HussainAlsadah-assignment3.git
-2. Open `index.html` in a browser (static site, no server required).
-3. An internet connection is required for the Tech Trivia and Quotes widgets to fetch data from their respective APIs. Both degrade gracefully if the APIs are unreachable.
-4. Test responsive behavior by resizing the window or using DevTools device emulation.
+   `https://github.com/HussainAlsadah/202282700-HussainAlsadah-assignment4.git`
+2. Open `index.html` in a browser.
+3. Test desktop and mobile layouts using browser resizing or device emulation.
+4. Keep internet enabled if you want live trivia and quote API responses.
 
-Testing & Verification
-----------------------
-- Smooth scrolling: click navigation links to confirm smooth scroll to each section.
-- Theme toggle: click the round button at bottom-right to switch dark/light mode; refresh the page to confirm the preference is restored from localStorage.
-- Mobile nav: at narrow widths (<=768px), use the hamburger button to open/close the navigation dropdown.
-- Visitor timer: confirm the timer starts at 0s on page load and increments every second; confirm it formats correctly after 60 seconds (e.g. "1m 05s").
-- Login: click Log In, submit with an empty name to confirm validation; enter a name and confirm the user pill and welcome banner appear; refresh the page to confirm the session is restored; click logout to confirm the session clears.
-- Project filter: click each filter button to confirm only matching cards are shown; confirm the empty-state message appears when no cards match.
-- Project sort: select each sort option to confirm cards reorder correctly.
-- Tabs: click About, Skills, and Experience tabs in the About section; confirm the Skills tab triggers the animated progress bars.
-- Tech Trivia: confirm a question loads on page load, answer buttons highlight correctly/incorrectly on click, the Next Question button advances to the next question, and an error message appears if the API is unreachable.
-- Quotes widget: confirm a quote loads on page load; click "New Quote" to confirm it refreshes.
-- Contact form: submit with empty fields to confirm inline error messages appear; submit with an invalid email to confirm format validation; submit a valid form to confirm the success message appears and the form resets.
+## Testing and Verification Checklist
+
+- Check all navbar links
+- Test mobile menu open and close behavior
+- Test dark mode toggle and refresh persistence
+- Test login, logout, and refresh persistence
+- Test tab switching in the About section
+- Test skill bar animation
+- Test project filtering and sorting
+- Test project spotlight button multiple times
+- Test clicking project cards to trigger spotlight
+- Test trivia loading and answer flow
+- Test quote refresh behavior
+- Test contact form validation and success state
+- Test layout in both desktop and mobile widths
+
+## Known Remaining Submission Tasks
+
+The project code is ready for final submission polish, but the following submission items still depend on final preparation outside this document:
+
+- live deployment link
+- presentation slides
+- presentation video

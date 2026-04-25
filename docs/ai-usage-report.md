@@ -1,46 +1,68 @@
 # AI Usage Report
 
-Project: 202282700-HussainAlsadah-assignment3
+Project: 202282700-HussainAlsadah-assignment4
 
-Date: 2026-04-18
+Date: 2026-04-25
 
-Tools Used & Use Cases
-----------------------
+## Tools Used and Use Cases
 
-- Claude :
-    - Assisted in designing and implementing new features including the login/logout modal system, the Quotable API integration with fallback logic, the project filter and sort functionality, the visitor timer, and the Interactive section layout.
-    - Suggested UI improvements such as the live avatar preview in the login modal, the user pill with initials in the navbar, and moving the trivia and quotes widgets into their own dedicated section.
-    - Assisted in refactoring existing Assignment 2 code to cleanly accommodate the new features without breaking existing functionality.
-    - Assisted in debugging — helped identify why filter/sort was not re-rendering cards correctly (cards needed to be fully detached and re-appended to the DOM rather than just shown/hidden).
-    - Assisted in drafting documentation for README.md, technical-documentation.md, and this report.
+### ChatGPT / Codex
 
-Benefits & Challenges
----------------------
-- Benefits:
-    - Speed: quick and detailed responses allowed me to work on the application at a much faster pace than manually, especially for features like localStorage session persistence which would have taken significantly longer to research and implement from scratch.
-    - Inspiration: suggested improvements I had not thought of, such as the Escape key closing the modal, disabling the refresh button while a quote fetch is in progress, and avoiding repeating the same fallback quote twice in a row.
-    - Organization: consistently produced well-commented, clearly sectioned code that was easy to read and modify.
-    - Documentation: substantially faster to produce structured documentation drafts, although careful review was still needed to make sure everything accurately reflected the final implementation.
+Used for:
 
-- Challenges / Limitations:
-    - Generated code sometimes assumed element IDs or class names that did not match the existing HTML, requiring manual corrections.
-    - The first version of the filter/sort feature had a bug where cards would disappear after a second filter action. I had to identify this through testing and then explain it back to get a corrected version.
-    - Documentation drafts occasionally described intermediate versions of features rather than the final state, requiring editing.
+- reviewing the existing Assignment 3 portfolio and identifying what carried over into Assignment 4
+- suggesting improvements to make the site feel more like a polished final portfolio
+- refining the hero section, project area, and overall content presentation
+- implementing and adjusting project spotlight behavior
+- improving interactive behavior in JavaScript
+- rewriting the README and technical documentation for the final assignment
+- helping structure this AI usage report
 
-Learning Outcomes
------------------
-- Learned how localStorage can be used to persist meaningful application state such as user sessions across page refreshes, not just simple preferences like theme.
-- Better understood the DOM manipulation pattern of detaching and re-appending elements to reorder them, as opposed to CSS-only show/hide approaches.
-- Learned how to handle API failures gracefully using fallback content rather than only showing an error message.
-- Understood the value of async/await with try/catch/finally for API calls, particularly using finally to re-enable UI elements regardless of whether a request succeeded or failed.
-- Reinforced that AI-generated code always requires testing — features that look correct in isolation can break when combined with existing code.
+### AI-assisted coding workflow
 
+AI support was used for:
 
-Responsible Use & Modifications
--------------------------------
-I have manually reviewed AI-generated content as follows:
-- I understood the code and manually changed values and class names where they did not fit the existing structure.
-- I thoroughly tested every new feature and caught and fixed bugs introduced by the generated code, particularly the filter/sort re-render issue.
-- I iterated on the login implementation by asking for specific improvements rather than accepting the first version, ensuring the final result matched my vision.
-- I made sure that all text content throughout the site reflects what I want to say and is not AI-generated.
-- Documentation was reviewed line by line and edited to accurately reflect the actual code and my own understanding of it.
+- code generation for selected UI and interaction improvements
+- debugging and refinement of existing front-end logic
+- wording suggestions for portfolio text and documentation
+- checking that the project better matched the Assignment 4 requirements
+
+## Benefits and Challenges
+
+### Benefits
+
+- AI sped up the process of reviewing an existing project and turning it into a stronger final submission.
+- It helped generate ideas for polishing the website without removing earlier features.
+- It was useful for quickly refining JavaScript interactions such as project spotlight behavior and UI improvements.
+- It made documentation drafting faster and more structured.
+
+### Challenges
+
+- AI suggestions still needed manual review to ensure they matched my existing project and personal style.
+- Some generated changes needed adjustment after seeing how they looked in the actual page layout.
+- It was important to avoid keeping text or design choices that felt too generic or too different from what I wanted.
+- Documentation had to be carefully updated so it described the final implementation rather than older assignment stages.
+
+## Learning Outcomes
+
+Through using AI in this assignment, I improved my understanding of:
+
+- how to refine an existing project instead of always building from scratch
+- how front-end polish can change the presentation quality of a website
+- how to manage UI state for filters, sorting, saved sessions, and highlighted project cards
+- how to combine API-based features with graceful fallback behavior
+- how to review AI-generated code critically and adapt it to fit my own goals
+
+## Responsible Use and Modifications
+
+I used AI responsibly in the following ways:
+
+- I reviewed all generated suggestions before keeping them.
+- I modified the generated code and text to fit my own portfolio and assignment requirements.
+- I tested interactive features after changes instead of assuming generated code was correct.
+- I removed or adjusted ideas that did not match the style or direction I wanted.
+- I made sure I understood the final implementation and could explain how it works.
+
+## Summary
+
+AI was used as a support tool for planning, improving, debugging, and documenting the project. It helped speed up development, but the final decisions, testing, and refinements were still done manually to ensure correctness, originality, and academic integrity.

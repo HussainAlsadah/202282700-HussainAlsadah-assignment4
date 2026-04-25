@@ -1,48 +1,80 @@
-# 202282700-HussainAlsadah-assignment3
+# 202282700-HussainAlsadah-assignment4
 
-Personal portfolio (Assignment 3) — an enhanced single-page site built on top of Assignment 2, adding API integrations, advanced logic, state management, and performance improvements.
+Personal portfolio web application for Assignment 4. This project brings together the work from the previous assignments into a more polished final portfolio with improved presentation, responsive design, interactive features, and documentation.
 
-Overview
---------
-This repository contains a lightweight personal portfolio with the following sections: About, Projects, Hobbies, Interactive, and Contact. Assignment 3 builds on the previous work by integrating external APIs, adding a login/logout system with session persistence, project filtering and sorting, a visitor timer, and a dedicated Interactive section.
+## Project Overview
 
-Features
---------
-- Responsive layout using Flexbox
-- Smooth scrolling for internal navigation
-- Dark / Light theme toggle with localStorage persistence
-- Mobile hamburger navigation
-- Tabbed About section with animated skill bars
-- Login / logout with localStorage session persistence and initials avatar
-- Visitor timer showing time spent on the page
-- Project filter by category and sort by name or date
-- Tech Trivia widget powered by the Open Trivia DB API
-- Quotes widget powered by the Quotable API with offline fallback
-- Contact form with client-side validation
+This is a static single-page portfolio website built with HTML, CSS, and vanilla JavaScript. It presents my background, skills, projects, interests, and contact form in a professional and interactive format.
 
-Run locally
------------
-1. Clone the repository: https://github.com/HussainAlsadah/202282700-HussainAlsadah-assignment3.git
+The final version includes:
 
-```bash
-git clone https://github.com/HussainAlsadah/202282700-HussainAlsadah-assignment3.git
-cd 202282700-HussainAlsadah-assignment3
+- a polished hero section and improved content hierarchy
+- responsive layout for desktop and mobile screens
+- dark and light theme toggle with saved preference
+- login/logout personalization with localStorage
+- project filtering, sorting, and spotlight highlighting
+- an interactive trivia widget using the Open Trivia DB API
+- a quote widget with API fetching and fallback content
+- contact form validation with user-friendly feedback
+
+## Project Structure
+
+```text
+202282700-HussainAlsadah-assignment4/
+├── README.md
+├── index.html
+├── css/
+│   └── styles.css
+├── js/
+│   └── script.js
+├── assets/
+│   └── images/
+├── docs/
+│   ├── ai-usage-report.md
+│   └── technical-documentation.md
+├── presentation/
+│   ├── slides.pdf
+│   ├── demo-video.mp4
+│   └── .gitkeep
+└── .gitignore
 ```
 
-2. Open `index.html` in a browser (static site — no server required).
-3. An internet connection is required for the Trivia and Quotes widgets. Both degrade gracefully if the APIs are unreachable.
+## Run Locally
 
-Files & Structure
------------------
-- `index.html` — main single-page markup
-- `css/styles.css` — all styles (responsive rules, dark mode, new components)
-- `js/script.js` — all interactivity including login, timer, filter/sort, APIs
-- `assets/images/` — project placeholder images and other assets
-- `docs/ai-usage-report.md` — AI usage report
-- `docs/technical-documentation.md` — technical documentation
-- `.gitignore` — excludes OS and editor files from the repository
+1. Clone the repository:
 
-AI Usage (summary)
--------------------
-I used Claude throughout Assignment 3 to generate and refine code for new features, suggest UI improvements, assist with debugging, and draft documentation. All outputs were manually reviewed, tested, and modified to fit the project and reflect my own understanding. Significant changes were needed in several places, and bugs found during testing were fixed manually.
-See `docs/ai-usage-report.md` for details.
+```bash
+git clone https://github.com/HussainAlsadah/202282700-HussainAlsadah-assignment4.git
+cd 202282700-HussainAlsadah-assignment4
+```
+
+2. Open `index.html` in a web browser.
+3. No build step or local server is required because this is a static website.
+4. An internet connection is recommended for the trivia and quote widgets. If the APIs are unavailable, the site still handles the situation gracefully.
+
+## Main Features
+
+- Smooth scrolling navigation
+- Mobile hamburger menu
+- Dark mode with localStorage persistence
+- Tabbed About section with animated skill bars
+- Personalized login/logout modal with saved session
+- Visitor timer
+- Project filter and sort controls
+- Project spotlight interaction
+- Trivia and quote widgets with API integration
+- Contact form with validation and success feedback
+
+## AI Usage Summary
+
+AI tools were used to support brainstorming, code refinement, debugging, UI improvement ideas, and documentation drafting. All AI-generated suggestions were reviewed, tested, and modified before being kept in the project.
+
+See [docs/ai-usage-report.md](docs/ai-usage-report.md) for the full report.
+
+## Technical Documentation
+
+Detailed technical notes are available in [docs/technical-documentation.md](docs/technical-documentation.md).
+
+## Live Deployment
+
+Deployment link: to be added after publishing the final site.

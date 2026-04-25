@@ -6,6 +6,8 @@ Date: 2026-04-25
 
 Repository: https://github.com/HussainAlsadah/202282700-HussainAlsadah-assignment4.git
 
+Live Deployment: https://hussainalsadah.github.io/202282700-HussainAlsadah-assignment4/
+
 ## Overview
 
 This document describes the final personal portfolio web application submitted for Assignment 4. The project continues the earlier portfolio work and refines it into a more polished final product with improved layout, stronger presentation, interactive features, and clearer documentation.
@@ -208,6 +210,5 @@ These images are used as previews inside the Projects section.
 
 The project code is ready for final submission polish, but the following submission items still depend on final preparation outside this document:
 
-- live deployment link
 - presentation slides
 - presentation video

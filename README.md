@@ -77,4 +77,4 @@ Detailed technical notes are available in [docs/technical-documentation.md](docs
 
 ## Live Deployment
 
-Deployment link: to be added after publishing the final site.
+Live site: https://hussainalsadah.github.io/202282700-HussainAlsadah-assignment4/
